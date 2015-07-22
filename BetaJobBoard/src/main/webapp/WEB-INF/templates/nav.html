@@ -1,0 +1,32 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand glyphicon glyphicon-leaf" href="#">CvApp</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="#">Page 1</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li sec:authorize="hasRole('ROLE_USER')"><a href="/userSettings"><span class="glyphicon glyphicon-log-in"></span> Settings</a></li>
+                <li><a href="/admin">Admin</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="?lang=en">English  <img th:src="@{/resources/flags/gb.svg}"  height="15" width="20"/></a></li>
+                        <li><a href="?lang=pl">Polish  <img th:src="@{/resources/flags/pl.svg}"  height="15" width="20"/></a></li>
+                    </ul>
+                </li>
+
+                <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li sec:authorize="isAuthenticated() == false"><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li sec:authorize="isAuthenticated()">
+                    <form th:action="@{/logout}" method="post">
+                            <button type="submit" class="btn btn-link"><span class="glyphicon glyphicon-log-in">Logout</span></button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

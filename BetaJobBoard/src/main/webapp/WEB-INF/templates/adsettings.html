@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Spring MVC view layer: Thymeleaf vs. JSP</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/resources/css/bootstrap.css}"/>
+    <script th:src="@{/resources/tinymce/tinymce.min.js}"></script>
+    <script>tinymce.init({selector:'textarea'});</script>
+
+</head>
+
+<body>
+
+<div th:replace="nav"></div>
+
+
+<div class="container">
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr  th:each="ad : ${allads}">
+            <td th:text="${ad.id}">John</td>
+            <td th:text="${ad.name}">Doe</td>
+            <td>
+
+                <!--MODAL-->
+
+                <button type="button" class="btn btn-info" data-toggle="modal" th:attr="data-target='#myModal'+${ad.id}">
+                    edit
+                </button>
+
+                <div class="modal fade" th:id="myModal+${ad.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Edit</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <!--FORM-->
+
+                                <form class="form-horizontal" role="form" action="#"
+                                      th:action="@{editAd}" th:object="${adEdit}" method="post">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2" for="title">Title:</label>
+                                        <div class="col-sm-10" >
+                                            <input type="text" name="name" class="form-control" id="title" th:value="${ad.name}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2" for="pwd">Text:</label>
+                                        <div class="col-sm-10">
+                                            <textarea id="pwd" th:field="*{text}" rows="10" cols="55" th:text="${ad.text}"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <input type="hidden" th:value="${ad.id}" th:name="idEdit"/>
+                                            <input class="btn btn-info" name="submit" type="submit" value="submit" />
+                                        </div>
+                                    </div>
+                                </form>
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </td>
+
+            <!--DELETE-->
+
+            <td>
+                <form method="POST" action="#" th:action="@{deleteAd}">
+                    <input type="hidden" th:value="${ad.id}" th:name="idDelete"/>
+                    <input class="btn btn-danger" name="submit" type="submit" value="delete"/>
+                </form>
+            </td>
+
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+
+<script th:src="@{/resources/2.1.4/jquery.min.js}"></script>
+<script th:src="@{/resources/js/bootstrap.js}"></script>
+
+</body>
+
+</html>

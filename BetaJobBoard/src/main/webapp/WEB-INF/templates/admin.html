@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Spring MVC view layer: Thymeleaf vs. JSP</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/resources/css/bootstrap.css}"/>
+
+</head>
+
+<body>
+
+
+<div th:replace="nav"></div>
+
+    <div class="container">
+        <form method="get" action="/adform">
+            <button type="submit" class="btn btn-default btn-lg btn-block">Create Ad</button>
+        </form>
+
+        <form method="get" action="/adsettings">
+            <button type="submit" class="btn btn-default btn-lg btn-block">Ad Settings</button>
+        </form>
+
+        <form method="get" action="/applicants">
+            <button type="submit" class="btn btn-default btn-lg btn-block">Applications</button>
+        </form>
+
+
+
+    </div>
+
+
+
+<script th:src="@{/resources/2.1.4/jquery.min.js}"></script>
+<script th:src="@{/resources/js/bootstrap.js}"></script>
+
+</body>
+
+</html>

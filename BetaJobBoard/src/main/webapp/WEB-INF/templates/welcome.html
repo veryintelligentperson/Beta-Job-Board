@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Spring MVC view layer: Thymeleaf vs. JSP</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/resources/css/bootstrap.css}"/>
+
+</head>
+
+<body>
+
+
+    <div th:replace="nav"></div>
+
+    <!--<p>ads:</p>-->
+    <!--<div th:each="ad : ${allads}">-->
+        <!--<a th:text="${ad.name}" th:href="@{/ad(id=${ad.id})}"></a>-->
+    <!--</div>-->
+    <div class="container">
+
+
+
+        <div class="jumbotron">
+            <h1 th:text="#{home.welcome}">Welcome!</h1>
+
+            <form method="get" action="/signup">
+                <button type="submit" class="btn btn-info">Register</button>
+            </form>
+
+        </div>
+
+
+
+        <div class="list-group" th:each="ad : ${allads}">
+            <a th:href="@{/ad(id=${ad.id})}" class="list-group-item active">
+                <h4 class="list-group-item-heading" th:text="${ad.name}">List group item heading</h4>
+                <p class="list-group-item-text">Lorem ipsum Lorem Ipsum</p>
+            </a>
+        </div>
+    </div>
+
+
+    <script th:src="@{/resources/2.1.4/jquery.min.js}"></script>
+    <script th:src="@{/resources/js/bootstrap.js}"></script>
+
+</body>
+
+</html>
